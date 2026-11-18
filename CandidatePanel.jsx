@@ -18,22 +18,12 @@ const CONFIGS = {
   ],
 };
 
-
-// ==================================================
-// 2. CANDIDATE COLORS
-// ==================================================
-
-
 const COLORS = {
   host: "#d5f0ec",
   srflx: "#fdecc8",
   relay: "#fbd9cf",
 };
 
-
-// ==================================================
-// 3. REACT COMPONENT
-// ==================================================
 
 export default function CandidatePanel() {
 
@@ -43,19 +33,9 @@ export default function CandidatePanel() {
 
   const [candidates, setCandidates] = useState([]);
   const [elapsed, setElapsed] = useState(null);
-  // State 3: new | gathering | complete (من حدث icegatheringstatechange)
+  // State 3
   const [gatherState, setGatherState] = useState("new");
-
-  // لو configName = stun هيرجع Google STUN.
-  // لو configName = none هيرجع Array فاضية.
-
   const iceServers = CONFIGS[configName];
-
-
-  // ==================================================
-  // 4. USE EFFECT - START GATHERING
-  // ==================================================
-
 
 useEffect(() => {
   let active = true;
@@ -64,8 +44,6 @@ useEffect(() => {
   setCandidates([]);
   setElapsed(null);
   setGatherState("new");
-
-  // تسجيل وقت بداية Gathering
   const start = performance.now();
 
   const stop = gatherCandidates({
@@ -104,19 +82,9 @@ useEffect(() => {
 }, [iceServers]);
 
 
-  // ==================================================
-  // 6. SORT CANDIDATES BY PRIORITY
-  // ==================================================
-
-
   const sorted = [...candidates].sort(
     (a, b) => b.priority - a.priority
   );
-
-
-  // ==================================================
-  // 7. RENDER THE USER INTERFACE
-  // ==================================================
 
   return (
 
@@ -124,10 +92,6 @@ useEffect(() => {
 
       <h1>ICE Candidate Panel</h1>
 
-
-      {/* ==========================================
-          STUN SERVER SELECTION
-          ========================================== */}
 
 
       <select
@@ -148,12 +112,7 @@ useEffect(() => {
       <p>
         Gathering Time:{" "}
         {elapsed !== null ? `${elapsed} ms` : "Gathering..."}
-      </p>
-
-      {/* ==========================================
-          CANDIDATES TABLE
-          ========================================== */}
-
+      </p> 
       <table
         style={{
           width: "100%",
