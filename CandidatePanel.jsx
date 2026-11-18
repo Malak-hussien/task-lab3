@@ -2,12 +2,6 @@
 import { useEffect, useState } from "react";
 import { gatherCandidates } from "../lib/gatherCandidates";
 
-// ==================================================
-// 1. STUN SERVER CONFIGURATIONS
-// ==================================================
-
-
-
 const CONFIGS = {
   none: [],
   stun: [
